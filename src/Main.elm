@@ -2,6 +2,9 @@ port module Main exposing (Model, init)
 
 import Browser
 import Element as E exposing (Element)
+import Element.Background as Background
+import Element.Border as Border
+import Element.Font as Font
 import Element.Input as EI
 import Platform exposing (Program)
 import Platform.Sub as Sub
@@ -31,11 +34,20 @@ init =
     }
 
 
+buttonStyle =
+    [ Background.color <| E.rgb 0 0 1
+    , Font.color <| E.rgb 1 1 1
+    , Border.color <| E.rgb 1 0 1
+    , E.paddingXY 10 5
+    , Border.rounded 3
+    ]
+
+
 view : Model -> Element Msg
 view model =
     E.column []
         [ E.row [] [ E.text "pitch: ", E.text (String.fromFloat model.pitch) ]
-        , EI.button [] { label = E.text "do the thing", onPress = Just DoTheThing }
+        , EI.button buttonStyle { label = E.text "do the thing", onPress = Just DoTheThing }
         ]
 
 

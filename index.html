@@ -7,22 +7,25 @@
     <meta name="viewport" content="width=device-width">
     <style>html,head,body { padding:0; margin:0; } 
       body { font-family: calibri, helvetica, arial, sans-serif; }</style>
+    <script type="text/javascript">var app = null; </script>
     <script type="text/javascript" src="static/pitchdetect.js"></script>
     <script type="text/javascript" src="static/main.js"></script>
     </head>
   <body>
     <div id="elm"></div> 
     <script type="text/javascript">
-      var app = Elm.Main.init(
+      app = Elm.Main.init(
         { node: document.getElementById("elm"),
           flags: { location : document.location.origin || "", 
                    width : window.innerWidth, 
                    height : window.innerHeight
                  }
         });
+      // pdapp = app;
       function blah (val) { 
-        window.alert(val); 
-        app.ports.pitch.send(57.7);
+        //window.alert(isPlaying); 
+        // app.ports.pitch.send(57.7);
+        toggleLiveInput();
       }
       app.ports.time.subscribe(blah);
     </script>

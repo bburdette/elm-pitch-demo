@@ -32,12 +32,13 @@ var theBuffer = null;
 var DEBUGCANVAS = null;
 var mediaStreamSource = null;
 var detectorElem, 
-	canvasElem,
 	waveCanvas,
 	pitchElem,
 	noteElem,
 	detuneElem,
 	detuneAmount;
+
+// var pdapp = null;
 
 window.onload = function() {
 	audioContext = new AudioContext();
@@ -52,9 +53,9 @@ window.onload = function() {
 	}
 	request.send(); */
 
+  /*
 	detectorElem = document.getElementById( "detector" );
-	canvasElem = document.getElementById( "output" );
-	DEBUGCANVAS = document.getElementById( "waveform" );
+	 DEBUGCANVAS = document.getElementById( "waveform" );
 	if (DEBUGCANVAS) {
 		waveCanvas = DEBUGCANVAS.getContext("2d");
 		waveCanvas.strokeStyle = "black";
@@ -64,7 +65,8 @@ window.onload = function() {
 	noteElem = document.getElementById( "note" );
 	detuneElem = document.getElementById( "detune" );
 	detuneAmount = document.getElementById( "detune_amt" );
-
+  */
+/*
 	detectorElem.ondragenter = function () { 
 		this.classList.add("droptarget"); 
 		return false; };
@@ -87,7 +89,7 @@ window.onload = function() {
 	  	reader.readAsArrayBuffer(e.dataTransfer.files[0]);
 	  	return false;
 	};
-
+*/
 
 
 }
@@ -119,6 +121,7 @@ function gotStream(stream) {
     updatePitch();
 }
 
+/*
 function toggleOscillator() {
     if (isPlaying) {
         //stop playing and return
@@ -144,6 +147,7 @@ function toggleOscillator() {
 
     return "stop";
 }
+*/
 
 function toggleLiveInput() {
     if (isPlaying) {
@@ -170,6 +174,7 @@ function toggleLiveInput() {
         }, gotStream);
 }
 
+/*
 function togglePlayback() {
     if (isPlaying) {
         //stop playing and return
@@ -198,6 +203,7 @@ function togglePlayback() {
 
     return "stop";
 }
+*/
 
 var rafID = null;
 var tracks = null;
@@ -344,15 +350,18 @@ function updatePitch( time ) {
 	}
 
  	if (ac == -1) {
- 		detectorElem.className = "vague";
-	 	pitchElem.innerText = "--";
-		noteElem.innerText = "-";
-		detuneElem.className = "";
-		detuneAmount.innerText = "--";
+ 		// detectorElem.className = "vague";
+	 	// pitchElem.innerText = "--";
+		// noteElem.innerText = "-";
+		// detuneElem.className = "";
+		// detuneAmount.innerText = "--";
  	} else {
+    app.ports.pitch.send(ac);
+    /*
 	 	detectorElem.className = "confident";
 	 	pitch = ac;
-	 	pitchElem.innerText = Math.round( pitch ) ;
+	 	
+    pitchElem.innerText = Math.round( pitch ) ;
 	 	var note =  noteFromPitch( pitch );
 		noteElem.innerHTML = noteStrings[note%12];
 		var detune = centsOffFromPitch( pitch, note );
@@ -366,6 +375,7 @@ function updatePitch( time ) {
 				detuneElem.className = "sharp";
 			detuneAmount.innerHTML = Math.abs( detune );
 		}
+    */
 	}
 
 	if (!window.requestAnimationFrame)
