@@ -38,60 +38,10 @@ var detectorElem,
 	detuneElem,
 	detuneAmount;
 
-// var pdapp = null;
-
 window.onload = function() {
 	audioContext = new AudioContext();
-	MAX_SIZE = Math.max(4,Math.floor(audioContext.sampleRate/5000));	// corresponds to a 5kHz signal
- /*	var request = new XMLHttpRequest();
-	request.open("GET", "../sounds/whistling3.ogg", true);
-	request.responseType = "arraybuffer";
-	request.onload = function() {
-	  audioContext.decodeAudioData( request.response, function(buffer) { 
-	    	theBuffer = buffer;
-		} );
-	}
-	request.send(); */
-
-  /*
-	detectorElem = document.getElementById( "detector" );
-	 DEBUGCANVAS = document.getElementById( "waveform" );
-	if (DEBUGCANVAS) {
-		waveCanvas = DEBUGCANVAS.getContext("2d");
-		waveCanvas.strokeStyle = "black";
-		waveCanvas.lineWidth = 1;
-	}
-	pitchElem = document.getElementById( "pitch" );
-	noteElem = document.getElementById( "note" );
-	detuneElem = document.getElementById( "detune" );
-	detuneAmount = document.getElementById( "detune_amt" );
-  */
-/*
-	detectorElem.ondragenter = function () { 
-		this.classList.add("droptarget"); 
-		return false; };
-	detectorElem.ondragleave = function () { this.classList.remove("droptarget"); return false; };
-	detectorElem.ondrop = function (e) {
-  		this.classList.remove("droptarget");
-  		e.preventDefault();
-		theBuffer = null;
-
-	  	var reader = new FileReader();
-	  	reader.onload = function (event) {
-	  		audioContext.decodeAudioData( event.target.result, function(buffer) {
-	    		theBuffer = buffer;
-	  		}, function(){alert("error loading!");} ); 
-
-	  	};
-	  	reader.onerror = function (event) {
-	  		alert("Error: " + reader.error );
-		};
-	  	reader.readAsArrayBuffer(e.dataTransfer.files[0]);
-	  	return false;
-	};
-*/
-
-
+  // corresponds to a 5kHz signal
+	MAX_SIZE = Math.max(4,Math.floor(audioContext.sampleRate/5000));	
 }
 
 function error() {
@@ -350,33 +300,11 @@ function updatePitch( time ) {
 	}
 
  	if (ac == -1) {
+    // pitch detection inconclusive!
  		// detectorElem.className = "vague";
-	 	// pitchElem.innerText = "--";
-		// noteElem.innerText = "-";
-		// detuneElem.className = "";
-		// detuneAmount.innerText = "--";
  	} else {
     app.ports.pitch.send(ac);
-    /*
-	 	detectorElem.className = "confident";
-	 	pitch = ac;
-	 	
-    pitchElem.innerText = Math.round( pitch ) ;
-	 	var note =  noteFromPitch( pitch );
-		noteElem.innerHTML = noteStrings[note%12];
-		var detune = centsOffFromPitch( pitch, note );
-		if (detune == 0 ) {
-			detuneElem.className = "";
-			detuneAmount.innerHTML = "--";
-		} else {
-			if (detune < 0)
-				detuneElem.className = "flat";
-			else
-				detuneElem.className = "sharp";
-			detuneAmount.innerHTML = Math.abs( detune );
-		}
-    */
-	}
+  	}
 
 	if (!window.requestAnimationFrame)
 		window.requestAnimationFrame = window.webkitRequestAnimationFrame;

@@ -11,7 +11,7 @@ import Platform.Sub as Sub
 
 
 type alias Model =
-    { title : String, pitch : Float }
+    { pitch : Float }
 
 
 type Msg
@@ -29,8 +29,7 @@ type alias Flags =
 
 init : Model
 init =
-    { title = "blah"
-    , pitch = 0
+    { pitch = 0
     }
 
 
@@ -46,7 +45,8 @@ buttonStyle =
 view : Model -> Element Msg
 view model =
     E.column []
-        [ E.row [] [ E.text "pitch: ", E.text (String.fromFloat model.pitch) ]
+        [ E.text "This only works in Chrome/Chromium as far as I know!"
+        , E.row [] [ E.text "pitch: ", E.text (String.fromFloat model.pitch) ]
         , EI.button buttonStyle { label = E.text "do the thing", onPress = Just DoTheThing }
         ]
 
@@ -88,18 +88,3 @@ port pitch : (Float -> msg) -> Sub msg
 
 
 port time : Float -> Cmd msg
-
-
-
-{-
-      // <script type="text/javascript" src="static/pitchdetect.js"></script>
-   From JS, you talk to these ports like this:
-
-   var app = Elm.Example.init();
-
-   app.ports.prices.send(42);
-   app.ports.prices.send(13);
-
-   app.ports.time.subscribe(callback);
-   app.ports.time.unsubscribe(callback);
--}
