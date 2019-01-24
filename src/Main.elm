@@ -55,7 +55,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         DoTheThing ->
-            ( model, time 42 )
+            ( model, doit () )
 
         Pitch p ->
             ( { model | pitch = p }, Cmd.none )
@@ -87,4 +87,4 @@ port pitch : (Float -> msg) -> Sub msg
 -- outgoing values
 
 
-port time : Float -> Cmd msg
+port doit : () -> Cmd msg

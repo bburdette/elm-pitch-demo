@@ -21,13 +21,10 @@
                    height : window.innerHeight
                  }
         });
-      // pdapp = app;
-      function blah (val) { 
-        //window.alert(isPlaying); 
-        // app.ports.pitch.send(57.7);
+      function dothething (val) { 
         toggleLiveInput();
       }
-      app.ports.time.subscribe(blah);
+      app.ports.doit.subscribe(dothething);
     </script>
   </body>
 </html>
